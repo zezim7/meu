@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Conversor PDF para DOCX</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+  </head>
+  <body>
+    <main class="container">
+      <header class="hero">
+        <span class="tag">Conversor gratuito</span>
+        <h1>Converta PDFs em documentos DOCX em segundos</h1>
+        <p>
+          Faça upload do seu PDF e receba um arquivo editável em Word com apenas
+          alguns cliques.
+        </p>
+      </header>
+
+      <section class="card">
+        <h2>Enviar PDF</h2>
+        <p class="hint">Tamanho máximo: 20 MB. Apenas arquivos .pdf</p>
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul class="messages">
+          {% for message in messages %}
+          <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+
+        <form class="form" action="{{ url_for('convert_pdf') }}" method="post" enctype="multipart/form-data">
+          <label class="file-upload">
+            <input type="file" name="pdf_file" accept="application/pdf" required />
+            <span>Escolher arquivo</span>
+          </label>
+          <button type="submit">Converter para DOCX</button>
+        </form>
+      </section>
+
+      <section class="steps">
+        <div>
+          <h3>1. Selecione</h3>
+          <p>Escolha o PDF salvo no seu computador.</p>
+        </div>
+        <div>
+          <h3>2. Converta</h3>
+          <p>Clique em converter e aguarde alguns segundos.</p>
+        </div>
+        <div>
+          <h3>3. Baixe</h3>
+          <p>Receba o DOCX pronto para edição.</p>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <p>Arquivos não ficam salvos após a conversão.</p>
+      </footer>
+    </main>
+  </body>
+</html>
